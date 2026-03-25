@@ -511,13 +511,15 @@ section { padding: 110px 60px; }
 .b-icon {
   font-size: 36px;
   margin-bottom: 18px;
-  display: block;
+  display: inline-block;
   filter: drop-shadow(0 0 12px rgba(224,224,224,0.15));
   transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s;
+  transform-origin: center center;
+  will-change: transform;
 }
 .b-card:hover .b-icon {
-  transform: scale(1.18) rotate(-5deg);
-  filter: drop-shadow(0 0 20px rgba(224,224,224,0.3));
+  transform: scale(1.08) rotate(-4deg);
+  filter: drop-shadow(0 0 16px rgba(224,224,224,0.28));
 }
 .b-title {
   font-family: 'Syne', sans-serif;
@@ -636,13 +638,15 @@ section { padding: 110px 60px; }
 .cb-hero   { grid-column: span 8; min-height: 180px; }
 .cb-third  { grid-column: span 3; min-height: 190px; }
 
-.cl-icon { font-size: 32px; margin-bottom: 14px; display: block;
+.cl-icon { font-size: 32px; margin-bottom: 14px; display: inline-block;
   transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s;
   filter: drop-shadow(0 0 10px rgba(224,224,224,0.1));
+  transform-origin: center center;
+  will-change: transform;
 }
 .b-card:hover .cl-icon {
-  transform: scale(1.2) rotate(-6deg);
-  filter: drop-shadow(0 0 18px rgba(224,224,224,0.28));
+  transform: scale(1.1) rotate(-5deg);
+  filter: drop-shadow(0 0 14px rgba(224,224,224,0.24));
 }
 .cl-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; margin-bottom: 8px; }
 .cb-tall .cl-name { font-size: 22px; }
@@ -843,43 +847,92 @@ section { padding: 110px 60px; }
   grid-template-columns: 1fr 1fr;
   gap: 72px;
   margin-top: 56px;
-  align-items: center;
+  align-items: start;
 }
-.why-visual {
-  height: 400px;
-  border: 1px solid var(--line);
+.why-left { display: flex; flex-direction: column; gap: 40px; }
+
+/* founder card */
+.founder-card {
+  border: 1px solid rgba(224,224,224,0.1);
   background: var(--bg3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 28px;
   position: relative;
   overflow: hidden;
 }
-.why-bg-text {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 90px;
-  color: rgba(224,224,224,0.04);
-  letter-spacing: -0.04em;
-  user-select: none;
-}
-.why-badge {
+.founder-card::before {
+  content: '';
   position: absolute;
-  bottom: 28px; left: 28px;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(224,224,224,0.35) 40%, rgba(224,224,224,0.35) 60%, transparent);
+}
+.founder-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.founder-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 1px solid rgba(224,224,224,0.15);
+  background: var(--bg2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: rgba(224,224,224,0.5);
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+.founder-text {}
+.founder-label {
   font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.14em;
+  font-size: 9px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--secondary);
-  border: 1px solid var(--line);
-  padding: 9px 14px;
-  background: var(--bg2);
+  margin-bottom: 5px;
 }
+.founder-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--main);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.founder-role {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-top: 4px;
+}
+.founder-bg-initial {
+  position: absolute;
+  right: -10px; bottom: -24px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 88px;
+  color: rgba(224,224,224,0.03);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
+}
+
 .why-points { display: flex; flex-direction: column; gap: 28px; }
 .why-point { display: flex; gap: 18px; align-items: flex-start; }
 .why-dash { color: var(--secondary); font-family: 'DM Mono', monospace; font-size: 12px; padding-top: 2px; flex-shrink: 0; }
 .why-pt-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 15px; margin-bottom: 5px; }
 .why-pt-desc { font-size: 13px; color: var(--secondary); line-height: 1.65; }
+
+@media (max-width: 960px) {
+  .why-grid { grid-template-columns: 1fr; gap: 40px; }
+}
 
 /* ---- CTA ---- */
 .cta-sec {
@@ -997,7 +1050,7 @@ footer {
   <div class="hero-grid"></div>
   <div class="hero-orb"></div>
   <div class="hero-content">
-    <div class="hero-badge">Digital Agency · Bangladesh</div>
+    <div class="hero-badge">Digital Agency · Global</div>
     <h1 class="hero-title">
       We Build
       <span class="t2">Intelligent</span>
@@ -1336,43 +1389,56 @@ footer {
 <section class="why" id="why">
   <div class="sec-label reveal left">Why Choose UMR</div>
   <div class="why-grid">
-    <div class="why-visual reveal left scale">
-      <div class="why-bg-text">UMR</div>
-      <div class="why-badge">Est. Universal Modern Range</div>
+
+    <!-- LEFT: title + founder card -->
+    <div class="why-left">
+      <h2 class="sec-title reveal">We're Not Just<br>Developers.</h2>
+
+      <div class="founder-card reveal reveal-delay-1">
+        <div class="founder-inner">
+          <div class="founder-avatar">MM</div>
+          <div class="founder-text">
+            <div class="founder-label">Founder &amp; Lead</div>
+            <div class="founder-name">Mohammad Mudassir</div>
+            <div class="founder-role">Universal Modern Range</div>
+          </div>
+        </div>
+        <div class="founder-bg-initial">MM</div>
+      </div>
     </div>
-    <div>
-      <h2 class="sec-title reveal" style="margin-bottom:36px;">We're Not Just<br>Developers.</h2>
-      <div class="why-points">
-        <div class="why-point reveal reveal-delay-1">
-          <div class="why-dash">—</div>
-          <div>
-            <div class="why-pt-title">Market Understanding</div>
-            <p class="why-pt-desc">We understand the Bangladesh market — what clients respond to, what builds trust, and what converts.</p>
-          </div>
+
+    <!-- RIGHT: why points -->
+    <div class="why-points" style="padding-top:8px;">
+      <div class="why-point reveal reveal-delay-1">
+        <div class="why-dash">—</div>
+        <div>
+          <div class="why-pt-title">Market Understanding</div>
+          <p class="why-pt-desc">We understand what clients respond to, what builds trust, and what converts — regardless of industry or market.</p>
         </div>
-        <div class="why-point reveal reveal-delay-2">
-          <div class="why-dash">—</div>
-          <div>
-            <div class="why-pt-title">AI-First Approach</div>
-            <p class="why-pt-desc">We don't just build websites. We build digital systems that work for you while you sleep, using the latest AI tools.</p>
-          </div>
+      </div>
+      <div class="why-point reveal reveal-delay-2">
+        <div class="why-dash">—</div>
+        <div>
+          <div class="why-pt-title">AI-First Approach</div>
+          <p class="why-pt-desc">We don't just build websites. We build digital systems that work for you while you sleep, using the latest AI tools.</p>
         </div>
-        <div class="why-point reveal reveal-delay-3">
-          <div class="why-dash">—</div>
-          <div>
-            <div class="why-pt-title">Direct Communication</div>
-            <p class="why-pt-desc">No corporate layers. You deal directly with the person building your product — fast, honest, and efficient.</p>
-          </div>
+      </div>
+      <div class="why-point reveal reveal-delay-3">
+        <div class="why-dash">—</div>
+        <div>
+          <div class="why-pt-title">Direct Communication</div>
+          <p class="why-pt-desc">No corporate layers. You deal directly with the person building your product — fast, honest, and efficient.</p>
         </div>
-        <div class="why-point reveal reveal-delay-4">
-          <div class="why-dash">—</div>
-          <div>
-            <div class="why-pt-title">Affordable Excellence</div>
-            <p class="why-pt-desc">Professional-grade results at prices that make sense for businesses and growing professionals.</p>
-          </div>
+      </div>
+      <div class="why-point reveal reveal-delay-4">
+        <div class="why-dash">—</div>
+        <div>
+          <div class="why-pt-title">Affordable Excellence</div>
+          <p class="why-pt-desc">Professional-grade results at prices that make sense for businesses and growing professionals.</p>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -1382,7 +1448,7 @@ footer {
   <h2 class="cta-title">Let's Build Your<br><span>Digital Future.</span></h2>
   <p class="cta-sub">Whether you're a doctor, a school, a business, or a freelancer — UMR has the tools and vision to take you online.</p>
   <div class="cta-btns">
-    <a href="mailto:hello@umr.agency" class="btn-primary">Get In Touch</a>
+    <a href="/cdn-cgi/l/email-protection#fb939e979794bb8e9689d59a9c9e959882" class="btn-primary">Get In Touch</a>
     <a href="#services" class="btn-ghost">See Services</a>
   </div>
 </section>
@@ -1391,7 +1457,7 @@ footer {
 <footer>
   <div class="ft-brand">
     <a href="#" class="nav-logo">UMR<span>Universal Modern Range</span></a>
-    <p>A digital agency building intelligent web presence for businesses and professionals across Bangladesh.</p>
+    <p>A digital agency building intelligent web presence for businesses and professionals worldwide.</p>
   </div>
   <div class="ft-col">
     <h4>Services</h4>
@@ -1406,19 +1472,18 @@ footer {
   <div class="ft-col">
     <h4>Contact</h4>
     <ul>
-      <li><a href="#">hello@umr.agency</a></li>
+      <li><a href="/cdn-cgi/l/email-protection#aac2cfc6c6c5eadfc7d884cbcdcfc4c9d3"><span class="__cf_email__" data-cfemail="137b767f7f7c53667e613d7274767d706a">[email&#160;protected]</span></a></li>
       <li><a href="#">WhatsApp</a></li>
       <li><a href="#">Facebook</a></li>
-      <li><a href="#">Dhaka, Bangladesh</a></li>
     </ul>
   </div>
 </footer>
 <div class="ft-bottom">
   <p>© 2025 UMR — Universal Modern Range. All rights reserved.</p>
-  <p>Crafted with precision.</p>
+  <p>Founded by <span style="color:rgba(224,224,224,0.45);letter-spacing:0.04em;">Mohammad Mudassir</span> &nbsp;·&nbsp; Crafted with precision.</p>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── SMOOTH SCROLL
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
@@ -1532,18 +1597,4 @@ document.querySelectorAll('.b-card').forEach((card, i) => {
 
   function spawnRipple(x, y, size, delay, cls) {
     const el = document.createElement('div');
-    el.className = 'touch-ripple' + (cls ? ' ' + cls : '');
-    el.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size}px;animation-delay:${delay}ms;`;
-    document.body.appendChild(el);
-    el.addEventListener('animationend', () => el.remove());
-  }
-
-  document.addEventListener('touchstart', e => {
-    const t = e.touches[0];
-    spawnRipple(t.clientX, t.clientY, 48, 0, '');
-    spawnRipple(t.clientX, t.clientY, 80, 60, 'r2');
-  }, { passive: true });
-})();
-</script>
-</body>
-</html>
+    el.className = 'touch-ripple'
