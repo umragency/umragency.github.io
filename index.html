@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UMR — Universal Modern Range</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0e0e0e">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -1834,6 +1840,7 @@ footer {
   </div>
 </section>
 
+
 <!-- FOOTER -->
 <footer>
   <div class="ft-brand">
@@ -1847,7 +1854,7 @@ footer {
       <li><a href="#">AI Agent Integration</a></li>
       <li><a href="#">Portfolio Sites</a></li>
       <li><a href="#">E-commerce</a></li>
-      <li><a href="#">Support & Maintenance</a></li>
+      <li><a href="#">Support &amp; Maintenance</a></li>
     </ul>
   </div>
   <div class="ft-col">
@@ -1888,10 +1895,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   const ring  = document.getElementById('curRing');
   const cross = document.getElementById('curCross');
 
-  let mx = -100, my = -100;   // actual mouse
-  let rx = -100, ry = -100;   // ring lerp position
+  let mx = -100, my = -100;
+  let rx = -100, ry = -100;
 
-  // Place dot + cross instantly
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
     dot.style.left   = mx + 'px';
@@ -1900,7 +1906,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     cross.style.top  = my + 'px';
   });
 
-  // Lerp ring toward mouse each frame
   (function lerpRing() {
     rx += (mx - rx) * 0.14;
     ry += (my - ry) * 0.14;
@@ -1909,13 +1914,11 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     requestAnimationFrame(lerpRing);
   })();
 
-  // Hover state — toggle on interactive elements
   document.querySelectorAll('a, button, .b-card, [role="button"]').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cur-hovering'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cur-hovering'));
   });
 
-  // Click burst
   document.addEventListener('mousedown', () => document.body.classList.add('cur-clicking'));
   document.addEventListener('mouseup',   () => document.body.classList.remove('cur-clicking'));
 })();
@@ -1933,29 +1936,23 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 // ── CARD 3D TILT + BENTO SPOTLIGHT
 document.querySelectorAll('.svc-card, .cl-card, .b-card').forEach(card => {
-  const shine = card.querySelector('.tilt-shine');
+  const shine     = card.querySelector('.tilt-shine');
   const spotlight = card.querySelector('.b-spotlight');
   card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const x = e.clientX - r.left, y = e.clientY - r.top;
-    const cx = r.width/2, cy = r.height/2;
+    const r  = card.getBoundingClientRect();
+    const x  = e.clientX - r.left, y = e.clientY - r.top;
+    const cx = r.width / 2, cy = r.height / 2;
     const rX = ((y - cy) / cy) * -6;
     const rY = ((x - cx) / cx) * 6;
-    card.style.transform = `perspective(700px) rotateX(${rX}deg) rotateY(${rY}deg) scale(1.02)`;
+    card.style.transform  = `perspective(700px) rotateX(${rX}deg) rotateY(${rY}deg) scale(1.02)`;
     card.style.transition = 'transform 0.06s ease';
-    if (shine) {
-      shine.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(224,224,224,0.1) 0%, transparent 60%)`;
-      shine.style.opacity = '1';
-    }
-    if (spotlight) {
-      spotlight.style.background = `radial-gradient(circle 220px at ${x}px ${y}px, rgba(224,224,224,0.055) 0%, transparent 70%)`;
-      spotlight.style.opacity = '1';
-    }
+    if (shine)     { shine.style.background     = `radial-gradient(circle at ${x}px ${y}px, rgba(224,224,224,0.1) 0%, transparent 60%)`; shine.style.opacity = '1'; }
+    if (spotlight) { spotlight.style.background = `radial-gradient(circle 220px at ${x}px ${y}px, rgba(224,224,224,0.055) 0%, transparent 70%)`; spotlight.style.opacity = '1'; }
   });
   card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
+    card.style.transform  = '';
     card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1), background 0.3s, box-shadow 0.4s';
-    if (shine) shine.style.opacity = '0';
+    if (shine)     shine.style.opacity = '0';
     if (spotlight) spotlight.style.opacity = '0';
   });
 });
@@ -1964,16 +1961,16 @@ document.querySelectorAll('.svc-card, .cl-card, .b-card').forEach(card => {
 const bentoObs = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
+      entry.target.style.opacity   = '1';
       entry.target.style.transform = 'none';
       bentoObs.unobserve(entry.target);
     }
   });
 }, { threshold: 0.08 });
 document.querySelectorAll('.b-card').forEach((card, i) => {
-  card.style.opacity = '0';
-  card.style.transform = 'translateY(30px) scale(0.97)';
-  card.style.transition = `opacity 0.65s cubic-bezier(0.16,1,0.3,1) ${i * 0.08}s, transform 0.65s cubic-bezier(0.16,1,0.3,1) ${i * 0.08}s, border-color 0.3s, box-shadow 0.4s`;
+  card.style.opacity    = '0';
+  card.style.transform  = 'translateY(30px) scale(0.97)';
+  card.style.transition = `opacity 0.65s cubic-bezier(0.16,1,0.3,1) ${i*0.08}s, transform 0.65s cubic-bezier(0.16,1,0.3,1) ${i*0.08}s, border-color 0.3s, box-shadow 0.4s`;
   bentoObs.observe(card);
 });
 
@@ -1985,27 +1982,18 @@ const form       = document.getElementById('contactForm');
 const submitBtn  = document.getElementById('cfSubmitBtn');
 const successMsg = document.getElementById('cfSuccess');
 
-function openContact() {
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeContact() {
-  overlay.classList.remove('open');
-  document.body.style.overflow = '';
-}
+function openContact()  { overlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+function closeContact() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
 
-document.querySelectorAll('.open-contact').forEach(el => {
-  el.addEventListener('click', openContact);
-});
+document.querySelectorAll('.open-contact').forEach(el => el.addEventListener('click', openContact));
 closeBtn.addEventListener('click', closeContact);
 backdrop.addEventListener('click', closeContact);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeContact(); });
 
-// Formspree AJAX submit
 form.addEventListener('submit', async e => {
   e.preventDefault();
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Sending...';
+  submitBtn.disabled     = true;
+  submitBtn.textContent  = 'Sending...';
   try {
     const res = await fetch(form.action, {
       method: 'POST',
@@ -2015,23 +2003,37 @@ form.addEventListener('submit', async e => {
     if (res.ok) {
       form.reset();
       successMsg.style.display = 'block';
-      submitBtn.textContent = 'Sent ✓';
+      submitBtn.textContent    = 'Sent ✓';
     } else {
       submitBtn.textContent = 'Error — try again';
-      submitBtn.disabled = false;
+      submitBtn.disabled    = false;
     }
   } catch {
     submitBtn.textContent = 'Error — try again';
-    submitBtn.disabled = false;
+    submitBtn.disabled    = false;
   }
 });
 </script>
 
 <script>
-// ── TOUCH RIPPLE (mobile — square burst matching site geometry)
+// ── TOUCH RIPPLE (mobile)
 (function() {
   if (!('ontouchstart' in window)) return;
 
   function spawnRipple(x, y, size, delay, cls) {
     const el = document.createElement('div');
-    el.className = 'touch-ripple'
+    el.className = 'touch-ripple' + (cls ? ' ' + cls : '');
+    el.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size}px;animation-delay:${delay}ms;`;
+    document.body.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+
+  document.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    spawnRipple(t.clientX, t.clientY, 48, 0, '');
+    spawnRipple(t.clientX, t.clientY, 80, 60, 'r2');
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
